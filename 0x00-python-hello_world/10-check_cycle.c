@@ -1,28 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "lists.h"
 
-struct node{
+/**
+ * check_cycle - checks if a linked list contains a cycle
+ * @list: linked list to check
+ *
+ * Return: 1 if the list has a cycle, 0 if it doesn't
+ */
+int check_cycle(listint_t *list)
+{
+	listint_t *slow = list;
+	listint_t *fast = list;
 
-	int data;
-	struct node *link;
-};
+	if (!list)
+		return (0);
 
-int main(){
+	while (slow && fast && fast->next)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast)
+			return (1);
+	}
 
-	struct node *head = NULL;
-	head = (struct node *)malloc(sizeof(struct node)); //allocating memory for first node
-
-	head->data = 45; // putting 45 in the data part of the link
-	head->link = NULL;// link is still Null as this is the first node
-
-	struct node *current = malloc(sizeof(struct node));// creating memory for the second(current node)
-	current->data = 98;//putting 98 in the data part of the node
-	current->link = NULL;// the link part has no values yet so it will be NULL
-	head->link = current; // now we are pointing to the current node
-
-
-
-	return 0;
-
-
-}d
+	return (0);
+}
